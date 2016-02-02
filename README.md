@@ -10,5 +10,5 @@ Installation
 $ git clone https://github.com/uberhacker/vim-install.git
 $ cd vim-install
 $ chmod +x vim-install
-$ sudo cp vim-install /usr/local/bin
+$ ./vim-install
 ```
