@@ -10,17 +10,41 @@ fi
 if [ "$PROCEED" != "y" ]; then
   exit
 fi
-VIM_NOX=$(dpkg -l | grep vim-nox)
-if [ -z "$VIM_NOX" ]; then
-  sudo apt-get install vim-nox -y
+PM=apt-get
+LM="dpkg -l"
+VIM=vim-nox
+CTAGS=exuberant-ctags
+if [ -f /etc/redhat-release ]; then
+  PM=yum
+  LM="rpm -qa"
+  VIM=vim-enhanced
+  CTAGS=ctags
 fi
-CTAGS=$(dpkg -l | grep exuberant-ctags)
-if [ -z "$CTAGS" ]; then
-  sudo apt-get install exuberant-ctags -y
+VIM_PKG=$($LM | grep $VIM)
+if [ -z "$VIM_PKG" ]; then
+  sudo $PM install $VIM -y
 fi
-SCREEN=$(dpkg -l | grep screen)
-if [ -z "$SCREEN" ]; then
-  sudo apt-get install screen -y
+CTAGS_PKG=$($LM | grep $CTAGS)
+if [ -z "$CTAGS_PKG" ]; then
+  sudo $PM install $CTAGS -y
+fi
+SCREEN_PKG=$($LM | grep screen)
+if [ -z "$SCREEN_PKG" ]; then
+  sudo $PM install screen -y
+fi
+VI=$(which vi 2> /dev/null)
+if [[ -z "$VI" || ! -L /usr/bin/vi ]]; then
+  echo -n "The vi command is not using the enhanced features of vim currently.  Would you like to use vim instead? (y/N): "; read -n 1 PROCEED
+  echo ""
+  if [ ! -z "$PROCEED" ]; then
+    if [ "$PROCEED" == "Y" ]; then
+      PROCEED=y
+    fi
+    if [ "$PROCEED" == "y" ]; then
+      sudo rm -f /usr/bin/vi 2> /dev/null
+      sudo ln -s /usr/bin/vim /usr/bin/vi
+    fi
+  fi
 fi
 cd
 rm -f .vimrc
