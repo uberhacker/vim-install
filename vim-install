@@ -119,6 +119,8 @@ set tabstop=2
 set shiftwidth=2
 set autoindent
 set smartindent
+set maxmempattern=2000000   "Don't limit memory usage
+set maxmemtot=2000000
 
 " Enforce consistent line endings: if 'ff' is set to "unix" and there are any
 " stray '\r' characters at ends of lines, then automatically remove them. See
@@ -202,7 +204,7 @@ autocmd BufWinLeave * call clearmatches()
 function! TrimWhiteSpace()
   %s/\s\+$//e
 endfunction
-autocmd BufWritePre *.inc,*.install,*.module,*.php,*.profile,*.test,*.theme :call TrimWhiteSpace()
+autocmd BufWritePre *.css,*.inc,*.install,*.js,*.module,*.php,*.profile,*.sass,*.test,*.theme :call TrimWhiteSpace()
 
 " Start a screen shell session and compass watch
 nnoremap <silent> <F6> :ScreenShell compass watch<CR>
