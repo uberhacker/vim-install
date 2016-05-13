@@ -204,7 +204,7 @@ autocmd BufWinLeave * call clearmatches()
 function! TrimWhiteSpace()
   %s/\s\+$//e
 endfunction
-autocmd BufWritePre *.css,*.inc,*.install,*.js,*.module,*.php,*.profile,*.sass,*.test,*.theme :call TrimWhiteSpace()
+autocmd BufWritePre *.css,*.inc,*.install,*.js,*.module,*.php,*.profile,*.scss,*.test,*.theme :call TrimWhiteSpace()
 
 " Start a screen shell session and compass watch
 nnoremap <silent> <F6> :ScreenShell compass watch<CR>
