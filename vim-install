@@ -121,6 +121,7 @@ set autoindent
 set smartindent
 set maxmempattern=2000000   "Don't limit memory usage
 set maxmemtot=2000000
+set viminfo='20,<1000,s10,h "Copy up to 1000 lines per register (default is 50)
 
 " Enforce consistent line endings: if 'ff' is set to "unix" and there are any
 " stray '\r' characters at ends of lines, then automatically remove them. See
