@@ -14,7 +14,14 @@ PM=apt-get
 LM="dpkg -l"
 VIM=vim-nox
 CTAGS=exuberant-ctags
+REDHAT=
 if [ -f /etc/redhat-release ]; then
+  REDHAT=1
+fi
+if [ -f /etc/system-release ]; then
+  REDHAT=1
+fi
+if test $REDHAT; then
   PM=yum
   LM="rpm -qa"
   VIM=vim-enhanced
